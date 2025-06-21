@@ -7,6 +7,7 @@ $courseId = $_GET["cid"];
 $rs = DataBase::search("SELECT * FROM `course` INNER JOIN `course_content` ON `course`.`id` = `course_content`.`course_id` WHERE `course`.`id` = '" . $courseId . "' ");
 $data = $rs->fetch_assoc();
 
+include "header3.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,6 +18,9 @@ $data = $rs->fetch_assoc();
     <title><?php echo $data["course_name"]; ?> | Vertex Institute</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/default.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
     <style>
         :root {
             --primary-color: #2c3e50;
@@ -201,7 +205,7 @@ WHERE course.id = '" . $courseId . "'");
                     </div>
                 </div>
                 <div class="col-lg-4 text-lg-end">
-                    <button class="btn btn-enroll btn-lg">
+                    <button class="btn btn-enroll btn-lg" onclick="enrolled(event);">
                         <i class="fas fa-shopping-cart me-2"></i> Enroll Now
                     </button>
                 </div>
@@ -219,8 +223,7 @@ WHERE course.id = '" . $courseId . "'");
 
                         <!-- Video Player -->
                         <div class="video-container mb-4">
-                            <iframe id="courseVideo" src="<?php echo $data["video_link"]; ?>"
-                                allowfullscreen></iframe>
+                            <iframe id="courseVideo" src="<?php echo $data["video_link"]; ?>" allowfullscreen></iframe>
                         </div>
 
                         <!-- Current Lesson Info -->
@@ -255,7 +258,7 @@ WHERE course.id = '" . $courseId . "'");
                                             $rs = DataBase::search("SELECT *
 FROM course
 INNER JOIN course_content ON course.id = course_content.course_id
-WHERE course.id = '".$courseId."'");
+WHERE course.id = '" . $courseId . "'");
                                             $rows = $rs->num_rows;
 
                                             for ($i = 0; $i < $rows; $i++) {
@@ -278,7 +281,7 @@ WHERE course.id = '".$courseId."'");
                                             }
 
                                             ?>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
@@ -570,6 +573,8 @@ WHERE course.id = '".$courseId."'");
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/alertify.min.js"></script>
+    <script src="script.js"></script>
     <script>
         // Lesson item click handler
         document.querySelectorAll('.lesson-item').forEach(item => {
@@ -606,12 +611,6 @@ WHERE course.id = '".$courseId."'");
                     }
                 });
             });
-        });
-
-        // Sample enrollment functionality
-        document.querySelector('.btn-enroll').addEventListener('click', function () {
-            alert('You are being redirected to the enrollment page');
-            // In a real implementation, this would redirect to checkout or enrollment process
         });
     </script>
 </body>

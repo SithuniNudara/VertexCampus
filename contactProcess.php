@@ -18,7 +18,7 @@ if(empty($name)){
 } elseif(empty($message)) {
     echo "Message is required.";
 } else {
-    $date = date("Y-m-d H:i:s");
+    $date = date("Y-m-d");
     DataBase::iud("INSERT INTO `messages` (`name`, `email`, `subject`, `message`,`added_time`) VALUES ('$name', '$email', '$subject', '$message','$date')");
     echo "success";
 }

@@ -3,7 +3,6 @@
 include("connection.php");
 
 $id = $_GET['id'];
-
 $rs = DataBase::search("SELECT * FROM `instructor` WHERE `id` = '" . $id . "'");
 $rows = $rs->num_rows;
 if ($rows > 0) {

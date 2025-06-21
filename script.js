@@ -297,7 +297,8 @@ function subscribe() {
 
 
 
-function sendMsg() {
+function sendMsg(event) {
+    event.preventDefault();
     var name = document.getElementById("name").value.trim();
     var email = document.getElementById("email").value.trim();
     var subject = document.getElementById("subject").value.trim();
@@ -313,12 +314,14 @@ function sendMsg() {
     request.onreadystatechange = function () {
         if (request.readyState == 4 && request.status == 200) {
             var response = request.responseText.trim();
-            //alertify.alert('Message Status', response);
             if (response === "success") {
-                alert("Message sent successfully!");
-                window.location.reload();
+                alertify.alert('Message', response);
+                document.getElementById("name").value = ""; 
+                document.getElementById("email").value = ""; 
+                document.getElementById("subject").value = "";
+                document.getElementById("message").value = "";
             } else {
-                alertify.alert('Message Status', response);
+                alertify.alert('Message', response);
             }
         }
     };
@@ -974,3 +977,9 @@ function updateAdminProfile(event) {
     r.send(f);
 }
 
+
+//enrolled
+function enrolled(event){
+    event.preventDefault();
+    alertify.alert('Message Status', "Successfully Enrolled to the Course!");
+}

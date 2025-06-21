@@ -25,20 +25,21 @@
             z-index: 9999 !important;
         }
 
-
-
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
         }
 
         .navbar-brand img {
-            height: 50px;
+            height: 40px;
             transition: all 0.3s ease;
         }
 
         .navbar {
             background-color: var(--primary-color);
-            padding: 10px 0;
+            padding: 5px 0;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
@@ -73,7 +74,13 @@
         /* Hero Slider */
         .hero-slider {
             height: 80vh;
-            min-height: 500px;
+            min-height: 600px;
+            margin-top: -20px;
+            margin-bottom: 5px;
+        }
+
+        .hidden-element {
+            display: none !important;
         }
 
         .carousel-caption {
@@ -205,7 +212,7 @@
 </head>
 
 <body data-bs-spy="scroll" data-bs-target=".navbar">
-    <?php include("header.php"); ?>
+    <?php include("header2.php"); ?>
     <!-- Hero Slider -->
     <section id="home" class="hero-slider">
         <div id="welcomeCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -549,7 +556,7 @@
                             <textarea class="form-control" rows="5" placeholder="Your Message" required
                                 id="message"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary" onclick="sendMsg();">Send Message</button>
+                        <button type="submit" class="btn btn-primary" onclick="sendMsg(event);">Send Message</button>
                     </form>
                 </div>
             </div>
@@ -563,7 +570,6 @@
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/alertify.min.js"></script>
 
     <script>
-        // Smooth scrolling for navigation
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -572,7 +578,6 @@
                     behavior: 'smooth'
                 });
 
-                // Update active nav link
                 document.querySelectorAll('.nav-link').forEach(link => {
                     link.classList.remove('active');
                 });
@@ -580,7 +585,6 @@
             });
         });
 
-        // Change navbar style on scroll
         window.addEventListener('scroll', function () {
             const navbar = document.querySelector('.navbar');
             if (window.scrollY > 50) {
